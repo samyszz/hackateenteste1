@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 export default function MedidaConverter() {
   const { t } = useTranslation();
 
+  // A estrutura de dados permanece a mesma
   const units = {
     length: {
       label: t('MeasureConverter.length'),
@@ -55,6 +56,11 @@ export default function MedidaConverter() {
     if (inputValue === "" || !isNaN(Number(inputValue))) {
       setValue(inputValue);
     }
+  };
+
+  // Função auxiliar para obter o rótulo da unidade de forma segura
+  const getUnitLabel = (type: UnitType, key: string) => {
+    return (units[type].units as Record<string, string>)[key];
   };
 
   return (
@@ -125,11 +131,12 @@ export default function MedidaConverter() {
               </select>
             </div>
 
+            {/* CÓDIGO CORRIGIDO AQUI */}
             {value && (
               <div className="text-center mt-4 text-xl font-medium">
-                {value} {(units[type].units as any)[from]} ={" "}
+                {value} {getUnitLabel(type, from)} ={" "}
                 <span className="text-blue-600 dark:text-blue-400 font-bold">
-                  {result} {(units[type].units as any)[to]}
+                  {result} {getUnitLabel(type, to)}
                 </span>
               </div>
             )}
