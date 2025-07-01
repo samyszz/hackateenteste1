@@ -6,7 +6,6 @@ interface Ibutton {
   onClick?: () => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function Recharge({ children, onClick }: Ibutton) {
   return (
     <div>

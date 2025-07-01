@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useNews } from "../hooks/useNews";
 import Loading from "@/components/Loading";
 import { useTranslation } from "react-i18next";
+import Image from "next/image"; // Importar o componente Image
 
 export default function News() {
   const { articles, loading, refetch } = useNews();
@@ -38,11 +39,15 @@ export default function News() {
             >
               <Link href={`/noticias/${encodeURIComponent(article.article_id)}`}>
                 {article.image_url ? (
-                  <img
-                    src={article.image_url}
-                    alt={article.title}
-                    className="mb-3 w-full h-40 object-cover rounded"
-                  />
+                  <div className="relative w-full h-40 mb-3">
+                    <Image
+                      src={article.image_url}
+                      alt={article.title}
+                      layout="fill"
+                      objectFit="cover"
+                      className="rounded"
+                    />
+                  </div>
                 ) : (
                   <div className="mb-3 w-full h-40 flex items-center justify-center bg-gray-200 dark:bg-zinc-700 text-gray-500 dark:text-gray-400 rounded">
                     {t('News.no_image')}

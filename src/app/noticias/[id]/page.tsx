@@ -5,6 +5,7 @@ import Loading from "@/components/Loading";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import Image from "next/image"; // Importar o componente Image
 
 export default function DetailSNews() {
   const { articles, loading } = useNews();
@@ -21,7 +22,7 @@ export default function DetailSNews() {
   if (!article) {
     return (
       <div className="min-h-screen flex items-center justify-center text-center text-red-500 text-xl">
-        {t('news_no_news_found')}
+        {t('News.no_news_found')}
       </div>
     );
   }
@@ -37,22 +38,26 @@ export default function DetailSNews() {
           </Recharge>
         </div>
         {article.image_url && (
-          <img
-            src={article.image_url}
-            alt={article.title}
-            className="w-full h-64 object-cover rounded-t-2xl shadow-md"
-          />
+          <div className="relative w-full h-64">
+            <Image
+              src={article.image_url}
+              alt={article.title}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-t-2xl shadow-md"
+            />
+          </div>
         )}
         <div className="p-6 flex flex-col">
           <h1 className="text-2xl md:text-3xl font-bold text-blue-900 dark:text-blue-300 mb-4">
             {article.title}
           </h1>
           <p className="text-gray-700 dark:text-gray-300 text-base md:text-lg mb-6 leading-relaxed">
-            {article.description || t('news_no_description')}
+            {article.description || t('News.no_description')}
           </p>
           {article.link && (
             <Link href={article.link} target="_blank" rel="noopener noreferrer" className="inline-block px-6 py-3 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 transition max-w-max">
-              {t('news_read_more')}
+              {t('News.read_more')}
             </Link>
           )}
         </div>

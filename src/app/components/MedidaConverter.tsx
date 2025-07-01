@@ -32,7 +32,7 @@ export default function MedidaConverter() {
       },
     },
   };
-  
+
   type UnitType = keyof typeof units;
   type UnitKey<T extends UnitType> = keyof (typeof units)[T]["units"];
 
@@ -93,7 +93,7 @@ export default function MedidaConverter() {
 
             <input
               type="text"
-              placeholder={t('MeasureConverter.value_placeholder')}
+              placeholder={t('MeasureConverter.value_placeholder') || 'Valor'}
               value={value}
               onChange={handleValueChange}
               className="w-full border rounded-md p-2 dark:bg-zinc-800 dark:text-white"
